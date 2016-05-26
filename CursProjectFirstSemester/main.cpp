@@ -5,6 +5,8 @@
 int* mainArray;
 int length;
 
+typedef void(*SORTFUNCTION) (int*, int);
+
 bool isArrayInitiallized()
 {
 	return mainArray;
@@ -46,11 +48,50 @@ void printArray(int* array, int length)
 	std::cout << std::endl;
 }
 
+void generateRandomMas()
+{
+	std::cout << "Введите размер массива" << std::endl;
+	std::cin >> length;
+
+	if (isArrayInitiallized())
+	{
+		delete[] mainArray;
+	}
+
+	mainArray = new int[length];
+
+	for (int i = 0; i < length; i++)
+	{
+		mainArray[i] = rand();
+	}
+
+	std::cout << "Массив сгенерирован" << std::endl;
+}
+
+void timer(SORTFUNCTION function)
+{	
+	if (!isArrayInitiallized())
+	{
+		std::cout << "Массив пустой" << std::endl;
+		return;
+	}
+
+	unsigned int start_time = clock();
+
+	int* tempArray = copyMainArray();
+	function(tempArray, length);
+	//printArray(tempArray, length);
+	delete[] tempArray;
+
+	unsigned int end_time = clock();
+	unsigned int search_time = end_time - start_time;
+	std::cout << "Время выполнения сортировки: " << search_time << std::endl;
+}
+
 int main()
 {
 	setlocale(LC_ALL, "rus");
 	int command = -1;
-	int* tempArray;
 	while (command != 0)
 	{
 		std::cout << "Доступные команды:" << std::endl;
@@ -69,30 +110,10 @@ int main()
 			fillArray();
 			break;
 		case 2:
-			if (!isArrayInitiallized())
-			{
-				std::cout << "Массив пустой" << std::endl;
-			}
-			else 
-			{
-				tempArray = copyMainArray();
-				mergeSort(tempArray, length);
-				printArray(tempArray, length);
-				delete[] tempArray;
-			}
+			timer(mergeSort);
 			break;
 		case 3:
-			if (!isArrayInitiallized())
-			{
-				std::cout << "Массив пустой" << std::endl;
-			}
-			else
-			{
-				tempArray = copyMainArray();
-				quickSort(tempArray, length);
-				printArray(tempArray, length);
-				delete[] tempArray;
-			}
+			timer(quickSort);
 			break;
 		case 4:
 			break;
@@ -107,6 +128,7 @@ int main()
 			}
 			break;
 		case 6:
+			generateRandomMas();
 			break;
 		case 7:
 			system("cls");
