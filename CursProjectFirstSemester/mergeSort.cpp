@@ -1,7 +1,8 @@
 #include "sorts.h"
 
 void merge(int* const A, int const lengthA, int* const B, int const lengthB, int* C)
-{ //Выполнить слияние массива A, содержащего nA элементов,
+{
+	//Выполнить слияние массива A, содержащего nA элементов,
 	//  и массива B, содержащего nB элементов.
 	//  Результат записать в массив C.
 

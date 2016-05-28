@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="heapSort.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mergeSort.cpp" />
     <ClCompile Include="quickSort.cpp" />
