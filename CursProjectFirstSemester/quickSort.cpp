@@ -1,23 +1,23 @@
 // нахождение опорного элемента
 int partition(int* a, int p, int r)
 {
-	int x = *(a + r);
+	int x = a[r];
 	int i = p - 1;
 	int j;
 	int tmp;
 	for (j = p; j < r; j++)
 	{
-		if (*(a + j) <= x)
+		if (a[j] <= x)
 		{
 			i++;
-			tmp = *(a + i);
-			*(a + i) = *(a + j);
-			*(a + j) = tmp;
+			tmp = a[i];
+			a[i] = a[j];
+			a[j] = tmp;
 		}
 	}
-	tmp = *(a + r);
-	*(a + r) = *(a + i + 1);
-	*(a + i + 1) = tmp;
+	tmp = a[r];
+	a[r] = a[i + 1];
+	a[i + 1] = tmp;
 	return i + 1;
 }
 
