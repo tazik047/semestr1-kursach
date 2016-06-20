@@ -2,10 +2,10 @@
 #include <locale>
 #include "sorts.h"
 
+using namespace std;
+
 int* mainArray;
 int length;
-
-typedef void(*SORTFUNCTION) (int*, int);
 
 bool isArrayInitiallized()
 {
@@ -14,25 +14,25 @@ bool isArrayInitiallized()
 
 void fillArray()
 {
-	std::cout << "Введите размер массива" << std::endl;
-	std::cin >> length;
-	if (length <= 0)
-	{
-		std::cout << "Длина массива должна быть положительная" << std::endl;
-		length = 0;
-		return;
-	}
-	std::cout << "Введите все элементы массива:" << std::endl;
 	if (isArrayInitiallized())
 	{
 		delete[] mainArray;
 	}
-
+	cout << "Введите размер массива" << endl;
+	cin >> length;
+	if (length <= 0)
+	{
+		cout << "Длина массива должна быть положительная" << endl;
+		length = 0;
+		return;
+	}
+	cout << "Введите все элементы массива:" << endl;
+	
 	mainArray = new int[length];
 
 	for (int i = 0; i < length; i++)
 	{
-		std::cin >> mainArray[i];
+		cin >> mainArray[i];
 	}
 }
 
@@ -48,20 +48,26 @@ void printArray(int* array, int length)
 {
 	for (int i = 0; i < length; i++)
 	{
-		std::cout << array[i] << " ";
+		cout << array[i] << " ";
 	}
 
-	std::cout << std::endl;
+	cout << endl;
 }
 
 void generateRandomMas()
 {
-	std::cout << "Введите размер массива" << std::endl;
-	std::cin >> length;
-
 	if (isArrayInitiallized())
 	{
 		delete[] mainArray;
+	}
+	cout << "Введите размер массива" << endl;
+	cin >> length;	
+
+	if (length <= 0)
+	{
+		cout << "Длина массива должна быть положительная" << endl;
+		length = 0;
+		return;
 	}
 
 	mainArray = new int[length];
@@ -71,14 +77,14 @@ void generateRandomMas()
 		mainArray[i] = rand();
 	}
 
-	std::cout << "Массив сгенерирован" << std::endl;
+	cout << "Массив сгенерирован" << endl;
 }
 
-void timer(SORTFUNCTION function)
+void timer(void(*function) (int* m, int l))
 {	
 	if (!isArrayInitiallized())
 	{
-		std::cout << "Массив пустой" << std::endl;
+		cout << "Массив пустой" << endl;
 		return;
 	}
 
@@ -91,7 +97,7 @@ void timer(SORTFUNCTION function)
 
 	unsigned int end_time = clock();
 	unsigned int search_time = end_time - start_time;
-	std::cout << "Время выполнения сортировки: " << search_time << std::endl;
+	cout << "Время выполнения сортировки: " << search_time << endl;
 }
 
 int main()
@@ -101,16 +107,16 @@ int main()
 	length = 0;
 	while (command != 0)
 	{
-		std::cout << "Доступные команды:" << std::endl;
-		std::cout << "1. Ввести массив для тестирования" << std::endl;
-		std::cout << "2. Сортировка слиянием" << std::endl;
-		std::cout << "3. Быстрая сортировка" << std::endl;
-		std::cout << "4. С помощью кучи" << std::endl;
-		std::cout << "5. Распечатать текущий массив" << std::endl;
-		std::cout << "6. Сгенерировать массив заданной длины" << std::endl;
-		std::cout << "7. Очистить экран" << std::endl;
-		std::cout << "0. Выйти" << std::endl;
-		std::cin >> command;
+		cout << "Доступные команды:" << endl;
+		cout << "1. Ввести массив для тестирования" << endl;
+		cout << "2. Сортировка слиянием" << endl;
+		cout << "3. Быстрая сортировка" << endl;
+		cout << "4. С помощью кучи" << endl;
+		cout << "5. Распечатать текущий массив" << endl;
+		cout << "6. Сгенерировать массив заданной длины" << endl;
+		cout << "7. Очистить экран" << endl;
+		cout << "0. Выйти" << endl;
+		cin >> command;
 		switch (command)
 		{
 		case 1:
@@ -128,7 +134,7 @@ int main()
 		case 5:
 			if (!isArrayInitiallized())
 			{
-				std::cout << "Массив пустой" << std::endl;
+				cout << "Массив пустой" << endl;
 			}
 			else 
 			{
@@ -143,7 +149,7 @@ int main()
 			break;
 		}
 
-		std::cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << std::endl;
+		cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" << endl;
 	}
 
 	return 0;
