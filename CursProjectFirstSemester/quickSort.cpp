@@ -2,23 +2,23 @@
 int partition(int* a, int p, int r)
 {
 	int x = a[r];
-	int i = p - 1;
+	int i = p;
 	int j;
 	int tmp;
 	for (j = p; j < r; j++)
 	{
 		if (a[j] <= x)
 		{
-			i++;
 			tmp = a[i];
 			a[i] = a[j];
 			a[j] = tmp;
+			i++;
 		}
 	}
 	tmp = a[r];
-	a[r] = a[i + 1];
-	a[i + 1] = tmp;
-	return i + 1;
+	a[r] = a[i];
+	a[i] = tmp;
+	return i;
 }
 
 void quickSort(int* a, int p, int r)
