@@ -7,6 +7,20 @@ using namespace std;
 int* mainArray;
 int length;
 
+bool readNumber(int &a)
+{
+	cin >> a;
+	if (!cin.good())
+	{
+		a = 0;
+		cin.clear();
+		cin.sync();
+		return false;
+	}
+
+	return true;
+}
+
 bool isArrayInitiallized()
 {
 	return length!=0;
@@ -19,7 +33,11 @@ void fillArray()
 		delete[] mainArray;
 	}
 	cout << "Введите размер массива" << endl;
-	cin >> length;
+	if (!readNumber(length))
+	{
+		cout << "Длина массива должна быть числом" << endl;
+		return;
+	}
 	if (length <= 0)
 	{
 		cout << "Длина массива должна быть положительная" << endl;
@@ -32,7 +50,13 @@ void fillArray()
 
 	for (int i = 0; i < length; i++)
 	{
-		cin >> mainArray[i];
+		if (!readNumber(mainArray[i]))
+		{
+			cout << "Элементы масива должны быть числами" << endl;
+			delete[] mainArray;
+			length = 0;
+			return;
+		}
 	}
 }
 
@@ -61,7 +85,11 @@ void generateRandomMas()
 		delete[] mainArray;
 	}
 	cout << "Введите размер массива" << endl;
-	cin >> length;	
+	if (!readNumber(length))
+	{
+		cout << "Длина массива должна быть числом" << endl;
+		return;
+	}
 
 	if (length <= 0)
 	{
@@ -116,7 +144,13 @@ int main()
 		cout << "6. Сгенерировать массив заданной длины" << endl;
 		cout << "7. Очистить экран" << endl;
 		cout << "0. Выйти" << endl;
-		cin >> command;
+		if (!readNumber(command))
+		{
+			cout << "Неправильная команда" << endl << endl;
+			command = -1;
+			continue;
+		}
+		
 		switch (command)
 		{
 		case 1:
