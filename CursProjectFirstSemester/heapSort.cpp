@@ -12,8 +12,8 @@ void downHeap(int a[], int k, int n) {
 	int child;
 	new_elem = a[k];
 
-	while (k <= n / 2) {  		// пока у a[k] есть дети 
-		child = 2 * k;
+	while (2*k + 1 < n) {  		// пока у a[k] есть дети 
+		child = 2 * k + 1;
 		//  выбираем большего сына 
 		if (child < n && a[child] < a[child + 1])
 			child++;
